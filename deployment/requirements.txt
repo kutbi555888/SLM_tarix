@@ -1,0 +1,7 @@
+# Faqat modelni ishlatish uchun; dataset va pytest bu yerda kerak emas.
+tokenizers>=0.20,<0.24
+numpy>=1.26,<3
+PyYAML>=6,<7
+fastapi>=0.110,<1
+uvicorn>=0.29,<1
+pydantic>=2,<3

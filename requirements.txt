@@ -1,0 +1,12 @@
+# Python 3.11 yoki 3.12. CPU uchun torch alohida CPU manbasidan o'rnatilishi mumkin.
+torch>=2.3,<3
+tokenizers>=0.20,<0.24
+datasets==4.4.1
+pyarrow==22.0.0
+numpy>=1.26,<3
+PyYAML>=6,<7
+fastapi>=0.110,<1
+uvicorn>=0.29,<1
+pydantic>=2,<3
+httpx>=0.27,<1
+pytest>=8,<10

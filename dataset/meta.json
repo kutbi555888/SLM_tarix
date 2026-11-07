@@ -1,0 +1,16 @@
+{
+  "vocab_size": 4096,
+  "dtype": "uint16",
+  "eos_id": 0,
+  "block_size": 128,
+  "tokenizer_sha256": "1b2a1953d28a90170292851806c9a21aa77597d4af91ca0a9ae52a468dbe45a9",
+  "n_docs_train": 499,
+  "n_tokens_train": 828698,
+  "sha256_train": "c09fe10031a6ebdff774898b83ec4056327567097cbf5f9c998173255a12b3cb",
+  "n_docs_val": 27,
+  "n_tokens_val": 27518,
+  "sha256_val": "5a220c602f4c6976461ec236b4a0cf18699262d860c5aeb2b6c0c169e02557ad",
+  "n_docs_test": 27,
+  "n_tokens_test": 26215,
+  "sha256_test": "64390e129c7defd3ad3309443328b371132e603f4ca354db51cde5a82a986784"
+}

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="uz">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Tarixcha — kichik til modeli</title>
+  <style>
+    :root{color-scheme:light;--ink:#17322e;--muted:#53665e;--paper:#faf8f2;--line:#d6ddd4;--accent:#176c5a}
+    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 system-ui,sans-serif}
+    header{border-bottom:1px solid var(--line);background:#fff;padding:20px max(24px,calc((100% - 1000px)/2));display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{font-size:24px;font-weight:800;letter-spacing:-1px}.tag{font-size:13px;color:var(--muted)}
+    main{max-width:1050px;margin:auto;padding:48px 24px}h1{font-size:clamp(30px,5vw,48px);line-height:1.15;letter-spacing:-1.5px;margin:12px 0 20px}
+    .intro{max-width:690px;color:var(--muted)}.eyebrow{color:var(--accent);font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase}
+    .layout{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:32px}.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px}
+    h2{margin:0 0 20px;font-size:20px}label{display:block;font-weight:600;margin-bottom:7px}textarea,input{font:inherit;border:1px solid #a6b8ac;border-radius:8px;padding:10px;width:100%;background:#fff;color:var(--ink)}
+    textarea{resize:vertical;min-height:160px}textarea:focus,input:focus,button:focus-visible{outline:3px solid #a9d9c6;outline-offset:2px}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0}.help{font-size:13px;color:var(--muted);margin:6px 0 12px}
+    button{border:0;border-radius:8px;background:var(--accent);color:#fff;font:600 16px system-ui;padding:13px 20px;cursor:pointer}button:disabled{opacity:.55;cursor:wait}.primary{width:100%}
+    .examples{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.examples button{padding:6px 10px;font-size:12px;background:#e7f0e9;color:var(--ink)}
+    #output{white-space:pre-wrap;overflow-wrap:anywhere;min-height:200px;font-size:17px}#status{min-height:28px;font-size:14px;color:var(--muted)}
+    #metrics{border-top:1px solid var(--line);margin-top:20px;padding-top:12px;font-size:13px;color:var(--muted)}
+    .note{border-left:3px solid #b57c26;padding:12px 16px;margin:24px 0;background:#f6efdf;font-size:14px}.footer{font-size:13px;color:var(--muted);margin-top:32px}
+    @media(max-width:740px){main{padding:30px 18px}.layout{grid-template-columns:1fr}header{padding:16px 18px}.tag{max-width:170px;text-align:right}}
+  </style>
+</head>
+<body>
+  <header><span class="brand">Tarixcha.</span><span class="tag" id="health">Model tekshirilmoqda…</span></header>
+  <main>
+    <div class="eyebrow">O‘zbekcha kichik til modeli</div>
+    <h1>Tarix haqida bir jumla boshlang.</h1>
+    <p class="intro">Model siz yozgan matnning davomini yaratadi. Bu tarix mavzusidagi maqolalar bilan o‘qitilgan kichik tajriba: natija orqali til modelining qanday ishlashini kuzatishingiz mumkin.</p>
+    <div class="layout">
+      <form class="card" id="form">
+        <h2>Matnni davom ettirish</h2>
+        <label for="prompt">Boshlang‘ich matn</label>
+        <textarea id="prompt" maxlength="4000" required>Amir Temur</textarea>
+        <div class="examples" aria-label="Boshlang‘ich matn namunalari">
+          <button type="button" data-prompt="Amir Temur">Amir Temur</button>
+          <button type="button" data-prompt="Buxoro shahri">Buxoro shahri</button>
+          <button type="button" data-prompt="Tarixni o'rganish">Tarixni o‘rganish</button>
+        </div>
+        <div class="row">
+          <div><label for="length">Yangi tokenlar</label><input id="length" type="number" min="1" max="256" value="80" required></div>
+          <div><label for="temperature">Tasodifiylik</label><input id="temperature" type="number" min="0" max="2" step="0.1" value="0.8" required></div>
+        </div>
+        <p class="help">Token — matnning kichik bo‘lagi. Tasodifiylik 0 bo‘lsa, model har safar eng yuqori baholi davomni tanlaydi.</p>
+        <label for="seed">Tasodifiy tanlovning boshlang‘ich soni</label>
+        <input id="seed" type="number" min="0" max="2147483647" value="42" required>
+        <p class="help">Bir xil matn, sozlamalar va boshlang‘ich son natijani qayta olishga yordam beradi.</p>
+        <button class="primary" type="submit" id="submit">Davomini yaratish</button>
+      </form>
+      <section class="card" aria-labelledby="result-title">
+        <h2 id="result-title">Model yaratgan matn</h2>
+        <div id="status" role="status" aria-live="polite">Boshlang‘ich matnni kiriting va tugmani bosing.</div>
+        <div id="output" aria-live="polite"></div>
+        <div id="metrics">Natija shu yerda paydo bo‘ladi.</div>
+      </section>
+    </div>
+    <p class="note">Bu o‘quv modeli. U xato, takroriy yoki mazmunsiz jumlalar yaratishi mumkin. Tarixiy sana va voqealarni ishonchli manbadan tekshiring. Model savol-javob uchun maxsus o‘qitilmagan.</p>
+    <p class="footer">Ma’lumot: o‘zbekcha Wikipedia’dan mavzu so‘zlari bilan tanlangan kichik to‘plam. Manbalar va litsenziya shartlari loyiha ichidagi DATASET_CARD.md faylida.</p>
+  </main>
+  <script>
+    // Sahifa va model bir serverdan ishlaydi; boshqa xizmatga matn yuborilmaydi.
+    const form=document.querySelector('#form'),submit=document.querySelector('#submit');
+    const statusBox=document.querySelector('#status'),output=document.querySelector('#output');
+    document.querySelectorAll('[data-prompt]').forEach(button=>button.addEventListener('click',()=>{
+      document.querySelector('#prompt').value=button.dataset.prompt;
+    }));
+    fetch('/health').then(response=>{if(!response.ok)throw new Error();return response.json();})
+      .then(data=>document.querySelector('#health').textContent=data.status==='tayyor'?'Model ishlashga tayyor':'Model yuklanmoqda…')
+      .catch(()=>document.querySelector('#health').textContent='Server bilan aloqa yo‘q');
+    form.addEventListener('submit',async event=>{
+      event.preventDefault();
+      const prompt=document.querySelector('#prompt').value.trim();
+      if(!prompt){statusBox.textContent='Avval boshlang‘ich matn yozing.';return;}
+      submit.disabled=true;statusBox.textContent='Matn yaratilmoqda…';output.textContent='';
+      document.querySelector('#metrics').textContent='';
+      try{
+        const response=await fetch('/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+          prompt,max_tokens:Number(document.querySelector('#length').value),temperature:Number(document.querySelector('#temperature').value),seed:Number(document.querySelector('#seed').value)
+        })});
+        const data=await response.json();
+        if(!response.ok)throw new Error(typeof data.detail==='string'?data.detail:'So‘rovni bajarib bo‘lmadi.');
+        // textContent matnni HTML sifatida bajarmasdan xavfsiz ko'rsatadi.
+        output.textContent=data.text;statusBox.textContent='Matn yaratildi.';
+        document.querySelector('#metrics').textContent=`${data.tokens_generated} ta yangi token · ${Math.round(data.latency_ms)} millisoniya`;
+      }catch(error){statusBox.textContent=error.message==='Failed to fetch'?'Serverga ulanib bo‘lmadi. Server ishlayotganini tekshiring.':error.message;}
+      finally{submit.disabled=false;}
+    });
+  </script>
+</body>
+</html>

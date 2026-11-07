@@ -1,0 +1,19 @@
+# O'zbekcha tarix maqolalari. To'liq Wikipedia o'rniga cheklangan namuna olinadi.
+dataset_name: wikimedia/wikipedia
+dataset_config: 20231101.uz
+revision: b04c8d1ceb2f5cd4588862100d08de323dccfbaa
+split: train
+max_documents: 600
+max_scanned: 180000
+min_latin_ratio: 0.90
+# Kalit so'zlar mavzuni taxminan ajratadi; bu tarixchi tekshiruvining o'rnini bosmaydi.
+title_keywords: [tarix, temur, xonlik, amirlik, sulola, qadimgi, arxeolog, imperiya, jadid, xorazm, somoniy, qoraxon, bobur, xiva]
+body_keywords: [sulola, hukmdor, saltanat, arxeolog, temuriy, xonlik, amirlik, qadimgi, tarixiy, asr]
+min_body_matches: 3
+min_chars: 400
+max_chars: 100000
+min_alpha_ratio: 0.40
+max_repeated_line_ratio: 0.30
+seed: 42
+val_ratio: 0.05
+test_ratio: 0.05

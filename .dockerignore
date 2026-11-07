@@ -1,0 +1,11 @@
+.git
+.venv
+__pycache__
+.pytest_cache
+.env
+data
+dataset
+tests
+checkpoints/last.pt
+checkpoints/best.pt
+checkpoints/smoke

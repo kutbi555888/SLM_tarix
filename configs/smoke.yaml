@@ -1,0 +1,27 @@
+# Tezkor ishlash sinovi: sifatli til natijasi uchun mo'ljallanmagan.
+vocab_size: 4096
+block_size: 64
+n_embd: 64
+n_layer: 2
+n_head: 4
+dropout: 0.0
+ffn_mult: 4
+tie_weights: true
+batch_size: 2
+grad_accum_steps: 1
+max_steps: 12
+warmup_steps: 2
+lr_max: 0.001
+min_lr_ratio: 0.1
+weight_decay: 0.1
+beta1: 0.9
+beta2: 0.95
+grad_clip: 1.0
+log_interval: 2
+eval_interval: 6
+eval_iters: 2
+checkpoint_interval: 6
+seed: 42
+precision: fp32
+num_threads: 2
+out_dir: checkpoints/smoke

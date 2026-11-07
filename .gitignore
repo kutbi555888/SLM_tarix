@@ -1,0 +1,25 @@
+# Katta yoki qayta yaratiladigan natijalar Git'ga kirmaydi; arxivda mavjud bo'lishi mumkin.
+data/**
+!data/**/
+!data/**/.gitkeep
+!data/**/README.md
+dataset/*.bin
+tokenizer/tokenizer.json
+checkpoints/**
+!checkpoints/.gitkeep
+!checkpoints/README.md
+evaluation/results.json
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+.ipynb_checkpoints/
+.vscode/
+.idea/
+*.zip
+core
+core.*

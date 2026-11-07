@@ -1,0 +1,27 @@
+# Asosiy kichik tajriba: o'zbekcha tarix matnini davom ettirish.
+vocab_size: 4096       # Tokenizer uchun maqsad; model haqiqiy lug'at hajmini oladi.
+block_size: 128        # Bir paytda ko'riladigan tokenlar soni.
+n_embd: 128            # Har bir tokenning vektor o'lchami.
+n_layer: 4             # Ketma-ket Transformer bloklari.
+n_head: 4              # 128 / 4 = 32 o'lchamli e'tibor boshlari.
+dropout: 0.10          # O'qitishda ayrim qiymatlarni vaqtincha o'chirish ulushi.
+ffn_mult: 4            # MLP ichki qatlamining kengayishi.
+tie_weights: true      # Kirish va chiqishda bitta vazn jadvali ishlatiladi.
+batch_size: 8          # Bir kichik paketdagi ketma-ketliklar.
+grad_accum_steps: 2    # Yangilashdan oldin ikki paketning gradienti yig'iladi.
+max_steps: 1200         # Optimizer yangilanishlari soni.
+warmup_steps: 60       # O'rganish tezligini asta oshirish qadamlari.
+lr_max: 0.0005
+min_lr_ratio: 0.10
+weight_decay: 0.10
+beta1: 0.9
+beta2: 0.95
+grad_clip: 1.0
+log_interval: 20
+eval_interval: 100
+eval_iters: 10
+checkpoint_interval: 100
+seed: 42
+precision: auto        # CUDA bo'lsa mos aralash aniqlik, CPU bo'lsa float32.
+num_threads: 2         # CPU oqimlari; muhitga qarab o'zgartirish mumkin.
+out_dir: checkpoints
